@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../services/firebase.service';
+
 
 @Component({
   selector: 'app-book-list',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookListComponent implements OnInit {
 
-  constructor() { }
+  allBooks: any; 
+  allBooks2: any; 
 
-  ngOnInit() {
+  constructor(private firebaseServise: FirebaseService ) { 
+
   }
+  
+  ngOnInit() {
+    this.firebaseServise.getBooks().subscribe(books => {
+      this.allBooks = books;
+    })
 
+    this.firebaseServise.getBooks2().valueChanges().subscribe(books => {
+      this.allBooks2 = books;
+  });
+  }
 }
