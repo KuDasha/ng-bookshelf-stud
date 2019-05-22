@@ -19,6 +19,7 @@ export class EditBookComponent implements OnInit {
   price;
   rate;
   isRead ;
+  genre;
   
   constructor(
     private firebaseService: FirebaseService,
@@ -34,6 +35,7 @@ export class EditBookComponent implements OnInit {
       this.imageUrl = book.imageUrl;
       this.price = book.price;
       this.rate = book.rate;
+      this.genre = book.genre;
     });
   }
   

@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject} from "angularfire2/database";
 import { Observable } from "rxjs";
-import {map} from 'rxjs/operators';
+//import {map} from 'rxjs/operators';
 import 'core-js/es7/reflect';
+import {
+  map,
+  switchMap,
+  debounceTime,
+  distinctUntilChanged
+} from 'rxjs/operators';
+
+import { BehaviorSubject } from "rxjs";
+// import "rxjs/add/operator/switchMap";
+// import "rxjs/add/observable/zip";
 
 
 @Injectable({
@@ -78,6 +88,35 @@ export class FirebaseService {
   updateBook(id, bookDetails){
     var filteredBook = JSON.parse(JSON.stringify(bookDetails)); //removes the undefined fields
      this.allBooks.update(id,filteredBook);
+  }
+  deleteBook(id){
+    this.allBooks.remove(id);
+ }
+
+
+
+ getBookSearch(start: BehaviorSubject<string>): Observable<any[]> {
+  return start.pipe(
+    switchMap(startText => {
+      const endText = startText + "\uf8ff";
+      return this.db
+        .list('/books', ref =>
+          ref
+            .orderByChild('title')
+            .limitToFirst(1)
+            .startAt(startText)
+            .endAt(endText)
+        )
+        .snapshotChanges()
+        .pipe(
+          debounceTime(200),
+          distinctUntilChanged(),
+          map(changes => {
+            return changes.map(c => {
+              return { key: c.payload.key, ...c.payload.val() };
+          });
+      }));
+    }));
   }
 
 

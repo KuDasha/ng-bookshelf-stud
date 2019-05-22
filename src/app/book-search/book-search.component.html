@@ -1,0 +1,16 @@
+<mat-card><strong>Book Search</strong></mat-card>
+<input
+  type="text"
+  #searchInput
+  (keyup)="search(searchInput.value)"
+  placeholder="search books..."
+  class="input"
+/>
+<div *ngFor="let book of (books |async)">
+  <h4>Title: {{ book?.title }}</h4>
+  <p>Author: {{ book?.author }}</p>
+</div>
+<div *ngIf="(books |async)?.length < 1">
+  <hr />
+  <p>No results found :(</p>
+</div> 

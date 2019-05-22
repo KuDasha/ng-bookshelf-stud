@@ -45,6 +45,7 @@ import { environment } from '../environments/environment';
 
 //service
 import { FirebaseService } from '../app/services/firebase.service';
+import { BookSearchComponent } from './book-search/book-search.component';
 
 
 
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path:'book-tag', component: BookTagComponent },
   { path:'edit-book/:id', component: EditBookComponent },
   { path:'delete-book/:id', component: DeleteBookComponent },
+  { path:'book-search', component: BookSearchComponent}
 
 
 ]
@@ -70,7 +72,8 @@ const routes: Routes = [
     FooterComponent,
     NavbarComponent,
     BookComponent,
-    EditBookComponent
+    EditBookComponent,
+    BookSearchComponent
     
   ],
   imports: [

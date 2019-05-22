@@ -19,6 +19,7 @@ export class BookComponent implements OnInit {
   imageUrl;
   dateadded:any;
   dateread:any;
+  genre;
 
   
   
@@ -38,6 +39,7 @@ export class BookComponent implements OnInit {
     this.imageUrl = book.imageUrl;
     this.dateadded = book.dateadded;
     this.dateread = book.dateread;
+    this.genre = book.genre;
 
    // console.log(book.title);
   });
