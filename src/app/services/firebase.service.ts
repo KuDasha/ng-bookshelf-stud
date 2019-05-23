@@ -23,7 +23,7 @@ export class FirebaseService {
   favoriteBooks: Observable<any>;
   unreadBooks: Observable<any>;
   bookDetails: AngularFireObject<any>;
-  allBooks: AngularFireList<any[]>;
+  allbooks: AngularFireList<any[]>;
   filteredBook: Observable<any[]>;
 
   constructor(private db: AngularFireDatabase) {}
@@ -34,9 +34,9 @@ export class FirebaseService {
   //  }
 
   getBooks2() {
-    this.allBooks = this.db.list('/books') as AngularFireList<any[]>;
-    console.log("at call getbooks2() " + this.allBooks);
-    return this.allBooks;
+    this.allbooks = this.db.list('/books') as AngularFireList<any[]>;
+    console.log("at call getbooks2() " + this.allbooks);
+    return this.allbooks;
   }
 
   getBooks() {
@@ -82,42 +82,44 @@ export class FirebaseService {
   addBook(bookDetails){
     var filteredBook = JSON.parse(JSON.stringify(bookDetails)); //removes the undefined fields
     console.log('Filtered Book - ',filteredBook);
-    return this.allBooks.push(filteredBook);
+    return this.allbooks.push(filteredBook);
   }
 
   updateBook(id, bookDetails){
     var filteredBook = JSON.parse(JSON.stringify(bookDetails)); //removes the undefined fields
-     this.allBooks.update(id,filteredBook);
+     this.allbooks.update(id,filteredBook);
   }
   deleteBook(id){
-    this.allBooks.remove(id);
+    this.allbooks.remove(id);
  }
 
+  
 
 
- getBookSearch(start: BehaviorSubject<string>): Observable<any[]> {
-  return start.pipe(
-    switchMap(startText => {
-      const endText = startText + "\uf8ff";
-      return this.db
-        .list('/books', ref =>
-          ref
-            .orderByChild('title')
-            .limitToFirst(1)
-            .startAt(startText)
-            .endAt(endText)
-        )
-        .snapshotChanges()
-        .pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          map(changes => {
-            return changes.map(c => {
-              return { key: c.payload.key, ...c.payload.val() };
-          });
-      }));
-    }));
-  }
+
+//  getBookSearch(start: BehaviorSubject<string>): Observable<any[]> {
+//   return start.pipe(
+//     switchMap(startText => {
+//       const endText = startText + "\uf8ff";
+//       return this.db
+//         .list('/books', ref =>
+//           ref
+//             .orderByChild('title')
+//             .limitToFirst(1)
+//             .startAt(startText)
+//             .endAt(endText)
+//         )
+//         .snapshotChanges()
+//         .pipe(
+//           debounceTime(200),
+//           distinctUntilChanged(),
+//           map(changes => {
+//             return changes.map(c => {
+//               return { key: c.payload.key, ...c.payload.val() };
+//           });
+//       }));
+//     }));
+//   }
 
 
 }

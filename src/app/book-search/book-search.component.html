@@ -1,4 +1,40 @@
-<mat-card><strong>Book Search</strong></mat-card>
+<form>
+  <input  name="searchInput" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 80%;">
+  <button (click)="searchText=''">X</button>
+</form>
+<table >
+  <thead>
+    <th>Title</th>
+    <th>Author</th>
+    
+    <th></th>
+  </thead>
+  <ng-container *ngFor="let book of allbooks">
+    <tr *ngIf="filterCondition(book)">
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <button mat-button mat-raised-button class="allbooksButton" [routerLink]="['/book-list']" skipLocationChange>
+        <i class="material-icons">visibility</i>All books</button>
+
+        
+    </tr>
+  </ng-container>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card><strong>Book Search</strong></mat-card>
 <input
   type="text"
   #searchInput
@@ -13,4 +49,4 @@
 <div *ngIf="(books |async)?.length < 1">
   <hr />
   <p>No results found :(</p>
-</div> 
+</div>  -->

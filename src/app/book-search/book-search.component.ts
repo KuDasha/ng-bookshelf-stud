@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-book-search',
@@ -9,27 +8,25 @@ import { Observable, BehaviorSubject } from 'rxjs';
   styleUrls: ['./book-search.component.css']
 })
 export class BookSearchComponent implements OnInit {
-
-  books : Observable<any[]>; 
-  startAt: BehaviorSubject<string | null> = new BehaviorSubject('');
-  constructor(
-    private firebaseService: FirebaseService,
-    private router: Router,
-    private route: ActivatedRoute) { }
-
-    ngOnInit() {
-      this.books = this.firebaseService.getBookSearch(this.startAt);
-    }
+  allbooks: any;
+  searchText: string = "";
   
-    search(searchText) {
-      this.startAt.next(searchText);
-    }
 
-//   search($event) {
-//     let q = $event.target.value
-//     this.startAt.next(q)
-//     this.endAt.next(q+"\uf8ff")
-// }
- 
-// } 
+  constructor(
+    public firebaseService: FirebaseService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.firebaseService.getBooks2().valueChanges().subscribe(books =>{
+      this.allbooks = books;
+    //this.firebaseService.getBooks().subscribe(books => {
+      //this.allbooks = books;
+    })
+  
   }
+
+  filterCondition(books) {
+    return books.title.toString().toLowerCase().indexOf(this.searchText.toLowerCase()) != -1;
+  }
+}
