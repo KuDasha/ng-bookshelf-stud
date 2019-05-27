@@ -25,6 +25,8 @@ export class FirebaseService {
   bookDetails: AngularFireObject<any>;
   allbooks: AngularFireList<any[]>;
   filteredBook: Observable<any[]>;
+  // favoriteBooks2: Observable<any>;
+  // topRatedBooks: any;
 
   constructor(private db: AngularFireDatabase) {}
 
@@ -62,6 +64,13 @@ export class FirebaseService {
   }));
     return this.favoriteBooks;
   }
+  // getFavoriteBooks2() {
+  //   this.favoriteBooks2 = this.db.list('/books').snapshotChanges().pipe(map(books => {
+  //     const topRatedBooks = books.filter(item => item.rate > 4);
+  //     return this.topRatedBooks;
+  //   }))
+  //   return this.favoriteBooks2;
+  // }
 
   getUnreadBooks() {
     this.unreadBooks = this.db.list('/books').snapshotChanges().pipe(map(books => {

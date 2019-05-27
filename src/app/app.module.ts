@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 //forms
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 //material
 import { MatButtonModule, 
@@ -41,11 +41,16 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 //firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
 //service
 import { FirebaseService } from '../app/services/firebase.service';
 import { BookSearchComponent } from './book-search/book-search.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from './providers/auth.service';
+import { UserService } from './providers/user.service';
 
 
 
@@ -57,7 +62,13 @@ const routes: Routes = [
   { path:'book-tag', component: BookTagComponent },
   { path:'edit-book/:id', component: EditBookComponent },
   { path:'delete-book/:id', component: DeleteBookComponent },
-  { path:'book-search', component: BookSearchComponent}
+  { path:'book-search', component: BookSearchComponent},
+  { path:'login', component: LoginComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    // canActivate: [GuardService]
+  }
 
 
 ]
@@ -73,7 +84,9 @@ const routes: Routes = [
     NavbarComponent,
     BookComponent,
     EditBookComponent,
-    BookSearchComponent
+    BookSearchComponent,
+    LoginComponent,
+    DashboardComponent
     
   ],
   imports: [
@@ -96,9 +109,10 @@ const routes: Routes = [
     MatListModule,
     MatIconModule,
     AngularFireModule.initializeApp(environment.firebase, 'student-book-app'),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
-  providers: [FirebaseService],
+  providers: [FirebaseService, AuthService, UserService, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

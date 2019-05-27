@@ -80,10 +80,17 @@ font-size: 200%;
     color :white !important;
   }
 
-  .spinner{
+  /* .spinner{
     position: fixed;
     left: 50%;
     top: 50%;
     margin-top: -50px;
     margin-left: -50px;
+  } */
+
+  img {
+    background-size: 40%, cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
+  
