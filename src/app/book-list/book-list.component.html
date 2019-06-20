@@ -10,10 +10,10 @@
             <mat-card-header>
               <mat-card-title><h4>{{book.data.title}}</h4></mat-card-title>
             </mat-card-header>
-            <img md-card-image src="{{book.data.imageUrl}}" alt="{{book.data.title}}">
+            <img src="{{book.data.imageUrl}}" alt="{{book.data.title}}">
             <mat-card-actions>
-              <button md-button md-raised-button class="detailsButton" [routerLink]="['/book/'+book.key]"> <i class="material-icons">visibility</i> Book Details</button>
-              <button md-button md-raised-button class="editButton" [routerLink]="['/edit-book/'+book.key]"> <i class="material-icons">mode_edit</i> Edit Book</button>
+              <button  class="detailsButton" [routerLink]="['/book/'+book.key]"> <i class="material-icons">visibility</i> Book Details</button>
+              <button class="editButton" [routerLink]="['/edit-book/'+book.key]"> <i class="material-icons">mode_edit</i> Edit Book</button>
             </mat-card-actions>
           </mat-card>
     </mat-grid-tile>

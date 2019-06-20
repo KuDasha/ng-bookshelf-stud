@@ -11,7 +11,7 @@ td{ padding-right: 50px; }
 .third-width{ width: 75%; }
 .quarter-width{ width: 25%; }
 
-mat-grid-tile{
+.mat-grid-tile{
     box-shadow: 10px 10px 5px #888888;
     margin: 1em auto;
 }
@@ -80,17 +80,9 @@ font-size: 200%;
     color :white !important;
   }
 
-  /* .spinner{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-  } */
-
   img {
-    background-size: 40%, cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    height: 300px;
+    width: auto;
   }
+  
   

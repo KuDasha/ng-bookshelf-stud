@@ -11,30 +11,6 @@
         <input matInput placeholder="Book Author" [(ngModel)]="author" name="author" required>
       </mat-form-field>
     
-      <!--<table class="full-width" cellspacing="10px;">
-          <tr>
-            <td>
-              <mat-form-field>
-                <input matInput [matDatepicker]="add" placeholder="added date"  required (dateChange)="EndDateChange($event)">
-                <mat-datepicker-toggle matSuffix [for]="add"></mat-datepicker-toggle>
-                <mat-datepicker #add></mat-datepicker>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field>
-                <input matInput [matDatepicker]="dateread" placeholder="Read date" required (dateChange)="updateDateRead($event)">
-                <mat-datepicker-toggle matSuffix [for]="dateadd"></mat-datepicker-toggle>
-                <mat-datepicker #dateread></mat-datepicker>
-              </mat-form-field> 
-              <mat-form-field>
-                <input matInput [matDatepicker]="expiration1" placeholder="Read date"   (dateChange)="EndDateChange($event)">
-                <mat-datepicker-toggle matSuffix [for]="expiration1"></mat-datepicker-toggle>
-                <mat-datepicker #expiration1></mat-datepicker>
-              </mat-form-field>
-            </td>
-          </tr>
-      </table>-->
-    
       <div *ngIf="isRead">
           <mat-form-field class="full-width">
               <textarea matInput rows="5" placeholder="Book Description" [(ngModel)]="description" name="description" ></textarea>
